@@ -1,6 +1,5 @@
 DESTDIR :=
-#PREFIX := /usr/local
-PREFIX := .
+PREFIX := /usr/local
 
 .PHONY: all
 all:

@@ -209,7 +209,7 @@ func readResource(typ, name string) []byte {
         return b
     }
 
-    if b, err := os.ReadFile(name); err != nil {
+    if b, err := os.ReadFile(filepath.Join(typ, name)); err != nil {
         fmt.Println(err)
     } else {
         return b
