@@ -199,7 +199,7 @@ func newTcellColor(s string) (tcell.Color, error) {
 }
 
 func readResource(typ, name string) []byte {
-	fmt.Println("readResource", typ, name)
+	// fmt.Println("readResource", typ, name)
 	if name == "-" {
 		b, err := io.ReadAll(os.Stdin)
 		if err != nil {

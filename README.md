@@ -2,10 +2,19 @@
 
 A terminal based typing test. Forked from /lemnos/tt.
 
+## docker: quick and recommended
+
+```bash
+
+docker pull f0c1s/tt
+docker run --rm -it f0c1s/tt
+
+```
+
 
 ![](demo.gif)
 
-# Installation
+## Installation
 
 ## Build local docker
 
