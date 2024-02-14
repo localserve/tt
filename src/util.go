@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
+	"io"
 	"math/rand"
 	"os"
 	"path/filepath"
@@ -25,7 +25,7 @@ func init() {
 }
 
 type cell struct {
-	c	  rune
+	c     rune
 	style tcell.Style
 }
 
@@ -199,8 +199,9 @@ func newTcellColor(s string) (tcell.Color, error) {
 }
 
 func readResource(typ, name string) []byte {
+	fmt.Println("readResource", typ, name)
 	if name == "-" {
-		b, err := ioutil.ReadAll(os.Stdin)
+		b, err := io.ReadAll(os.Stdin)
 		if err != nil {
 			panic(err)
 		}
@@ -208,12 +209,14 @@ func readResource(typ, name string) []byte {
 		return b
 	}
 
-	if b, err := ioutil.ReadFile(name); err == nil {
+	if b, err := os.ReadFile(name); err != nil {
+		fmt.Println(err)
+	} else {
 		return b
 	}
 
 	for _, d := range CONFIG_DIRS {
-		if b, err := ioutil.ReadFile(filepath.Join(d, typ, name)); err == nil {
+		if b, err := os.ReadFile(filepath.Join(d, typ, name)); err == nil {
 			return b
 		}
 	}
