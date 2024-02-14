@@ -1,36 +1,57 @@
 # What
 
-A terminal based typing test.
+A terminal based typing test. Forked from /lemnos/tt.
+
 
 ![](demo.gif)
 
 # Installation
 
-## Linux
+## Build local docker
+
+```bash
+
+# build docker image
+docker build . -t dev:tt
+
+# run docker container
+docker run --rm -it dev:tt
+docker run --rm -it dev:tt -quotes stoic
 
 ```
+
+## Linux
+
+```bash
+
 sudo curl -L https://github.com/lemnos/tt/releases/download/v0.4.2/tt-linux -o /usr/local/bin/tt && sudo chmod +x /usr/local/bin/tt
 sudo curl -o /usr/share/man/man1/tt.1.gz -L https://github.com/lemnos/tt/releases/download/v0.4.2/tt.1.gz
+
 ```
 
 ## OSX
 
-```
-mkdir -p /usr/local/bin /usr/local/share/man/man1 # Usually created by brew
+```bash
+
+sudo mkdir -p /usr/local/bin /usr/local/share/man/man1 # Usually created by brew
 
 sudo curl -L https://github.com/lemnos/tt/releases/download/v0.4.2/tt-osx -o /usr/local/bin/tt && sudo chmod +x /usr/local/bin/tt
 sudo curl -o /usr/local/share/man/man1/tt.1.gz -L https://github.com/lemnos/tt/releases/download/v0.4.2/tt.1.gz
+
 ```
 
 ## Uninstall
 
-```
+```bash
+
 sudo rm /usr/local/bin/tt /usr/share/man/man1/tt.1.gz
+
 ```
 
 ## From source
 
-```
+```bash
+
 # debian dependencies
 sudo apt install golang
 
@@ -38,6 +59,7 @@ sudo apt install golang
 git clone https://github.com/lemnos/tt
 cd tt
 make && sudo make install
+
 ```
 
 Best served on a terminal with truecolor and cursor shape support (e.g kitty, iterm)
@@ -83,3 +105,4 @@ Custom themes and word lists can be defined in `~/.tt/themes` and `~/.tt/words`
 and used in conjunction with the `-theme` and `-words` flags. A list of
 preloaded themes and word lists can be found in `words/` and `themes/` and are
 accessible by default using the respective flags.
+
