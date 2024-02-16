@@ -314,7 +314,7 @@ func main() {
 
 	if versionFlag {
 		fmt.Fprintf(os.Stderr, "tt version 0.5\n")
-		os.Exit(1)
+		os.Exit(0)
 	}
 
 	if noTheme {
@@ -369,6 +369,19 @@ func main() {
 			panic(r)
 		}
 	}()
+
+	if os.Getenv("MONGODB_URI") != "" {
+
+		client, collection := initMongoDBConnection()
+		if client == nil {
+			die("Failed to connect to MongoDB")
+		}
+		if collection == nil {
+			die("Failed to connect to MongoDB")
+		}
+
+		defer disconnectFromMongoDB(client)
+	}
 
 	var typer *typer
 	if noTheme {
@@ -436,13 +449,18 @@ func main() {
 				}
 				showReport(scr, cpm, wpm, accuracy, attribution, mistakes, tests[idx][0].Text)
 			}
+			/* insert to mongoDB */
+			if os.Getenv("MONGODB_URI") != "" {
+				insertOneDocument(collection, result{wpm, cpm, accuracy, time.Now().Unix(), mistakes, tests[idx][0].Text})
+			}
+
 			if oneShotMode {
 				exit(0)
 			}
 
 			idx++
 		case TyperSigInt:
-			exit(1)
+			exit(0)
 
 		case TyperResize:
 			//Resize events restart the test, this shouldn't be a problem in the vast majority of cases
