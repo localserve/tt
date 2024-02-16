@@ -279,7 +279,7 @@ func main() {
 	flag.StringVar(&wordFile, "words", "", "")
 	flag.StringVar(&quoteFile, "quotes", "", "")
 
-	flag.BoolVar(&showWpm, "showwpm", false, "")
+	flag.BoolVar(&showWpm, "showwpm", true, "")
 	flag.BoolVar(&noSkip, "noskip", false, "")
 	flag.BoolVar(&normalCursor, "blockcursor", false, "")
 	flag.BoolVar(&noBackspace, "nobackspace", false, "")
@@ -313,7 +313,7 @@ func main() {
 	}
 
 	if versionFlag {
-		fmt.Fprintf(os.Stderr, "tt version 0.5\n")
+		fmt.Fprintf(os.Stderr, "tt version 0.6\n")
 		os.Exit(0)
 	}
 
