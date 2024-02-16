@@ -26,15 +26,16 @@ type result struct {
 	Accuracy  float64   `json:"accuracy"`
 	Timestamp int64     `json:"timestamp"`
 	Mistakes  []mistake `json:"mistakes"`
+	Input     string    `json:"input"`
 }
 
 func die(format string, args ...interface{}) {
 	if scr != nil {
 		scr.Fini()
 	}
-	fmt.Fprintf(os.Stderr, "ERROR: ")
-	fmt.Fprintf(os.Stderr, format, args...)
-	fmt.Fprintf(os.Stderr, "\n")
+	_, _ = fmt.Fprintf(os.Stderr, "ERROR: ")
+	_, _ = fmt.Fprintf(os.Stderr, format, args...)
+	_, _ = fmt.Fprintf(os.Stderr, "\n")
 	os.Exit(1)
 }
 
@@ -71,7 +72,7 @@ func exit(rc int) {
 		if err != nil {
 			panic(err)
 		}
-		os.Stdout.Write(b)
+		_, _ = os.Stdout.Write(b)
 	}
 
 	if csvMode {
@@ -86,12 +87,9 @@ func exit(rc int) {
 	os.Exit(rc)
 }
 
-func showReport(scr tcell.Screen, cpm, wpm int, accuracy float64, attribution string, mistakes []mistake) {
+func showReport(scr tcell.Screen, cpm, wpm int, accuracy float64, attribution string, mistakes []mistake, input string) {
+	/* Build the mistake string */
 	mistakeStr := ""
-	if attribution != "" {
-		attribution = "\n\nAttribution: " + attribution
-	}
-
 	if len(mistakes) > 0 {
 		mistakeStr = "\nMistakes:    "
 		for i, m := range mistakes {
@@ -101,8 +99,16 @@ func showReport(scr tcell.Screen, cpm, wpm int, accuracy float64, attribution st
 			}
 		}
 	}
+	/* Add attribution to the report, if it exists. */
+	if attribution != "" {
+		attribution = "\t\t\t- " + attribution
+	}
 
-	report := fmt.Sprintf("WPM:         %d\nCPM:         %d\nAccuracy:    %.2f%%%s%s", wpm, cpm, accuracy, mistakeStr, attribution)
+	/* Biuld the report string */
+	report := fmt.Sprintf("WPM:         %d\nCPM:         %d\nAccuracy:    %.2f%%%s\n", wpm, cpm, accuracy,
+		mistakeStr)
+	report += "\n\n" + input
+	report += attribution
 
 	scr.Clear()
 	drawStringAtCenter(scr, report, tcell.StyleDefault)
@@ -420,13 +426,13 @@ func main() {
 			wpm := cpm / 5
 			accuracy := float64(ncorrect) / float64(nerrs+ncorrect) * 100
 
-			results = append(results, result{wpm, cpm, accuracy, time.Now().Unix(), mistakes})
+			results = append(results, result{wpm, cpm, accuracy, time.Now().Unix(), mistakes, tests[idx][0].Text})
 			if !noReport {
 				attribution := ""
 				if len(tests[idx]) == 1 {
 					attribution = tests[idx][0].Attribution
 				}
-				showReport(scr, cpm, wpm, accuracy, attribution, mistakes)
+				showReport(scr, cpm, wpm, accuracy, attribution, mistakes, tests[idx][0].Text)
 			}
 			if oneShotMode {
 				exit(0)

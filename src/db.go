@@ -25,7 +25,7 @@ func init() {
 		data = filepath.Join(home, "/.local/share/tt")
 	}
 
-	os.MkdirAll(data, 0700)
+	_ = os.MkdirAll(data, 0700)
 
 	FILE_STATE_DB = filepath.Join(data, ".db")
 	MISTAKE_DB = filepath.Join(data, ".errors")
