@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:latest
+    container_name: tt-mongo-service
+    ports:
+      - "27087:27017"
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: tt
+
+  go-app:
+    image: f0c1s/tt:0.7
+    container_name: tt-app-service
+    depends_on:
+      - mongo
+    environment:
+      MONGODB_URI: "mongodb://mongo:27087/"
+    stdin_open: true # Keep STDIN open
+    tty: true # Allocate a pseudo-TTY
+
+volumes:
+  mongo-data:
+
