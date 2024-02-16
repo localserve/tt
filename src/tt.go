@@ -110,17 +110,19 @@ func showReport(scr tcell.Screen, cpm, wpm int, accuracy float64, attribution st
 	report += "\n\n" + input
 	report += attribution
 
+	/* Draw the report */
 	scr.Clear()
 	drawStringAtCenter(scr, report, tcell.StyleDefault)
 	scr.HideCursor()
 	scr.Show()
 
+	/* Wait for the user to press a key */
 	for {
 		if key, ok := scr.PollEvent().(*tcell.EventKey); ok && (key.Key() == tcell.KeyEscape || key.Key() ==
 			tcell.KeyEnter || key.Rune() == 32) {
 			return
 		} else if ok && key.Key() == tcell.KeyCtrlC {
-			exit(1)
+			exit(0)
 		}
 	}
 }
