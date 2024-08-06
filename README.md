@@ -5,10 +5,7 @@ A terminal based typing test.
 ## docker: quick and recommended
 
 ```bash
-
-docker pull f0c1s/tt
-docker run --rm -it f0c1s/tt
-
+docker run --rm --interactive --tty f0c1s/tt -quotes stoic
 ```
 
 ![](demo.gif)
