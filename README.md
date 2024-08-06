@@ -20,11 +20,11 @@ docker run --rm -it f0c1s/tt
 ```bash
 
 # build docker image
-docker build . -t dev:tt
+docker build . -t f0c1s/tt:latest
 
 # run docker container
-docker run --rm -it dev:tt -quotes stoic
-docker run --rm -it dev:tt
+docker run --rm -it f0c1s/tt:latest -quotes stoic
+docker run --rm -it f0c1s/tt:latest
 
 ```
 
