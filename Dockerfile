@@ -18,4 +18,3 @@ FROM alpine
 COPY --from=build  /app/bin/tt /bin/tt
 
 ENTRYPOINT ["tt"]
-

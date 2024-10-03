@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 )
@@ -32,7 +31,7 @@ func init() {
 }
 
 func readValue(path string, o interface{}) error {
-	b, err := ioutil.ReadFile(path)
+	b, err := os.ReadFile(path)
 
 	if err != nil {
 		return err
@@ -47,7 +46,7 @@ func writeValue(path string, o interface{}) {
 		panic(err)
 	}
 
-	err = ioutil.WriteFile(path, b, 0600)
+	err = os.WriteFile(path, b, 0600)
 	if err != nil {
 		panic(err)
 	}

@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"io"
-	"io/ioutil"
 	"os"
 	"runtime"
 	"strconv"
@@ -57,7 +56,7 @@ func NewTyper(scr tcell.Screen, emboldenTypedText bool, fgcol, bgcol, hicol, hic
 	tty, err := os.OpenFile("/dev/tty", os.O_WRONLY, 0)
 	//Will fail on windows, but tt is still mostly usable via tcell
 	if err != nil {
-		tty = ioutil.Discard
+		tty = io.Discard
 	}
 
 	correctStyle := def.Foreground(hicol)
@@ -193,7 +192,7 @@ func (t *typer) start(s string, timeLimit time.Duration, startImmediately bool, 
 		}
 
 		rc = TyperComplete
-		duration = time.Now().Sub(startTime)
+		duration = time.Since(startTime)
 	}
 
 	redraw := func() {
@@ -252,7 +251,7 @@ func (t *typer) start(s string, timeLimit time.Duration, startImmediately bool, 
 		}
 
 		if t.ShowWpm && !startTime.IsZero() {
-			calcStats()
+			duration = time.Since(startTime)
 			if duration > 1e7 { //Avoid flashing large numbers on test start.
 				wpm := int((float64(ncorrect) / 5) / (float64(duration) / 60e9))
 				drawString(t.Scr, x+nc/2-4, y-2, fmt.Sprintf("WPM: %-10d\n", wpm), -1, t.defaultStyle)

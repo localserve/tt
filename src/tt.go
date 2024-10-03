@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -329,7 +329,7 @@ func main() {
 			wsz = sw - 8
 		}
 
-		s = regexp.MustCompile("\\s+").ReplaceAllString(s, " ")
+		s = regexp.MustCompile(`\s+`).ReplaceAllString(s, " ")
 		return strings.Replace(
 			wordWrap(strings.Trim(s, " "), wsz),
 			"\n", " \n", -1)
@@ -341,7 +341,7 @@ func main() {
 	case quoteFile != "":
 		testFn = generateQuoteTest(quoteFile)
 	case !isatty.IsTerminal(os.Stdin.Fd()):
-		b, err := ioutil.ReadAll(os.Stdin)
+		b, err := io.ReadAll(os.Stdin)
 		if err != nil {
 			panic(err)
 		}

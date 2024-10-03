@@ -10,7 +10,6 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-var client *mongo.Client
 var collection *mongo.Collection
 
 func initMongoDBConnection() (*mongo.Client, *mongo.Collection) {
@@ -21,13 +20,7 @@ func initMongoDBConnection() (*mongo.Client, *mongo.Collection) {
 	if err != nil {
 		panic(err)
 	}
-	/*
-		    defer func() {
-				if err = client.Disconnect(ctx); err != nil {
-					panic(err)
-				}
-			}()
-	*/
+
 	collection = client.Database("tt").Collection("tests")
 
 	return client, collection

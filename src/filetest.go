@@ -40,6 +40,6 @@ func generateTestFromFile(path string, startParagraph int) func() []segment {
 			return nil
 		}
 
-		return []segment{segment{paragraphs[idx], ""}}
+		return []segment{{paragraphs[idx], ""}}
 	}
 }

@@ -24,19 +24,14 @@ func init() {
 	}
 }
 
-type cell struct {
-	c     rune
-	style tcell.Style
-}
-
-func dbgPrintf(scr tcell.Screen, format string, args ...interface{}) {
-	for i := 0; i < 80; i++ {
-		for j := 0; j < 80; j++ {
-			scr.SetContent(i, j, ' ', nil, tcell.StyleDefault)
-		}
-	}
-	drawString(scr, 0, 0, fmt.Sprintf(format, args...), -1, tcell.StyleDefault)
-}
+// func dbgPrintf(scr tcell.Screen, format string, args ...interface{}) {
+// 	for i := 0; i < 80; i++ {
+// 		for j := 0; j < 80; j++ {
+// 			scr.SetContent(i, j, ' ', nil, tcell.StyleDefault)
+// 		}
+// 	}
+// 	drawString(scr, 0, 0, fmt.Sprintf(format, args...), -1, tcell.StyleDefault)
+// }
 
 func getParagraphs(s string) []string {
 	s = strings.Replace(s, "\r", "", -1)
@@ -101,19 +96,24 @@ func randomText(n int, words []string) string {
 	return strings.Replace(r, "\n", " \n", -1)
 }
 
-func stringToCells(s string) []cell {
-	a := make([]cell, len(s))
-	s = strings.TrimRight(s, "\n ")
+// type cell struct {
+// 	c     rune
+// 	style tcell.Style
+// }
 
-	len := 0
-	for _, r := range s {
-		a[len].c = r
-		a[len].style = tcell.StyleDefault
-		len++
-	}
+// func stringToCells(s string) []cell {
+// 	a := make([]cell, len(s))
+// 	s = strings.TrimRight(s, "\n ")
 
-	return a[:len]
-}
+// 	len := 0
+// 	for _, r := range s {
+// 		a[len].c = r
+// 		a[len].style = tcell.StyleDefault
+// 		len++
+// 	}
+
+// 	return a[:len]
+// }
 
 func drawString(scr tcell.Screen, x, y int, s string, cursorIdx int, style tcell.Style) {
 	sx := x
