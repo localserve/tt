@@ -302,7 +302,7 @@ func main() {
 
 	if listFlag != "" {
 		prefix := listFlag + "/"
-		for path, _ := range packedFiles {
+		for path := range packedFiles {
 			if strings.Index(path, prefix) == 0 {
 				_, f := filepath.Split(path)
 				fmt.Println(f)
