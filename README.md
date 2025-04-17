@@ -8,8 +8,6 @@ A terminal based typing test.
 docker run --rm --interactive --tty f0c1s/tt -quotes stoic
 ```
 
-![](demo.gif)
-
 ## Installation
 
 ## Build local docker
