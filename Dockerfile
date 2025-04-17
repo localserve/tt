@@ -5,10 +5,6 @@ ENV CGO_ENABLED=0
 
 WORKDIR /app
 
-#RUN apk add --no-cache git \
-#    && git clone --depth=1 https://github.com/lemnos/tt . \
-#    && go build -o bin/tt src/*.go
-
 COPY . .
 RUN go build -o bin/tt src/*.go
 

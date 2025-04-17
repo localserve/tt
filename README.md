@@ -56,19 +56,19 @@ options.
 
 ## Examples
 
- - `tt -quotes en` Starts quote mode with the builtin quote list 'en'.
- - `tt -n 10 -g 5` produces a test consisting of 50 randomly drawn words in 5 groups of 10 words each.
- - `tt -t 10` starts a timed test lasting 10 seconds.
- - `tt -theme gruvbox` Starts tt with the gruvbox theme.
+- `tt -quotes en` Starts quote mode with the builtin quote list 'en'.
+- `tt -n 10 -g 5` produces a test consisting of 50 randomly drawn words in 5 groups of 10 words each.
+- `tt -t 10` starts a timed test lasting 10 seconds.
+- `tt -theme gruvbox` Starts tt with the gruvbox theme.
 
 `tt` is designed to be easily scriptable and integrate nicely with
-other *nix tools. With a little shell scripting most features the user can
+other \*nix tools. With a little shell scripting most features the user can
 conceive of should be possible to implement. Below are some simple examples of
 what can be achieved.
 
- - `shuf -n 40 /usr/share/dict/words|tt`  Produces a test consisting of 40 random words drawn from your system's dictionary.
- - `curl http://api.quotable.io/random|jq '[.text=.content|.attribution=.author]'|tt -quotes -` Produces a test consisting of a random quote.
- - `alias ttd='tt -csv >> ~/wpm.csv'` Creates an alias called ttd which keeps a log of progress in your home directory`.
+- `shuf -n 40 /usr/share/dict/words|tt` Produces a test consisting of 40 random words drawn from your system's dictionary.
+- `curl http://api.quotable.io/random|jq '[.text=.content|.attribution=.author]'|tt -quotes -` Produces a test consisting of a random quote.
+- `alias ttd='tt -csv >> ~/wpm.csv'` Creates an alias called ttd which keeps a log of progress in your home directory`.
 
 The default behaviour is equivalent to `tt -n 50`.
 
@@ -81,8 +81,7 @@ and used in conjunction with the `-theme` and `-words` flags. A list of
 preloaded themes and word lists can be found in `words/` and `themes/` and are
 accessible by default using the respective flags.
 
+---
 
-----
+Forked from [lemnos/tt](https://github.com/lemnos/tt)
 
-
-Forked from lemnos/tt

@@ -211,12 +211,14 @@ Modify to taste.
 # AUTHOR
 
 Aetnaeus (aetnaeus@protonmail.com)
+Anubhav Saini (gh:iamanubhavsaini) (current maintainer)
 
 # SEE ALSO
 
 ## Project Page
 
-    https://github.com/lemnos/tt
+  This fork: https://github.com/localserve/tt
+  Original: https://github.com/lemnos/tt
 
 # LICENSE
 
